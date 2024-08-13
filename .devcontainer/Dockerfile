@@ -1,4 +1,4 @@
-FROM rust:1.67-bullseye
+FROM rust:bookworm
 
 ARG USERNAME=ownia
 ARG USER_UID=1000

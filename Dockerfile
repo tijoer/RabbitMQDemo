@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:bullseye
 
 #ENV TERM xterm-256color
 
