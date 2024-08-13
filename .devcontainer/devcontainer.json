@@ -1,0 +1,39 @@
+{
+	"name": "RabbitMQ Demo Devcontiner",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"cschleiden.vscode-github-actions",
+				"ms-vsliveshare.vsliveshare",
+				"matklad.rust-analyzer",
+				"serayuzgur.crates",
+				"vadimcn.vscode-lldb",
+				"rust-lang.rust-analyzer",
+				"humao.rest-client",
+				"GitHub.copilot"
+			],
+			"settings": {
+				"editor.formatOnSave": true
+				// "terminal.integrated.shell.linux": "/usr/bin/zsh"
+			}
+		}
+	},
+	// "dockerFile": "Dockerfile",
+	"portsAttributes": {
+		"8081": {
+			"label": "Rabbit Test Server 1"
+		},
+		"8082": {
+			"label": "Rabbit Test Server 2"
+		},
+		"8083": {
+			"label": "Rabbit Test Server 3"
+		},
+		"15672": {
+			"label": "Local RabbitMq Dashboard"
+		}
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+	}
+}
