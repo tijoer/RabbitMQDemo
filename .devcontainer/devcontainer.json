@@ -1,5 +1,5 @@
 {
-	"name": "RabbitMQ Demo Devcontiner",
+	"name": "RabbitMQ Demo Devcontainer",
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -18,7 +18,7 @@
 			}
 		}
 	},
-	// "dockerFile": "Dockerfile",
+	"dockerFile": "Dockerfile",
 	"portsAttributes": {
 		"8081": {
 			"label": "Rabbit Test Server 1"
@@ -35,5 +35,6 @@
 	},
 	"features": {
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
-	}
+	},
+	"postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}"
 }

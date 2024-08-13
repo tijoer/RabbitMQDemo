@@ -4,8 +4,8 @@ ARG USERNAME=tim
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-WORKDIR /usr/src/myapp
-COPY . .
+# WORKDIR /usr/src/myapp
+# COPY . .
 
 # RUN apt-get update
 # RUN apt-get install \
