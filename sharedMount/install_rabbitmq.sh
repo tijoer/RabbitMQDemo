@@ -1,13 +1,7 @@
 #!/bin/bash
 
-# function ctrl_c {
-# 	scroll_window_stop
-# 	printf "${RED}❌ Aborting RabbitMq installation. This is not a clean abort, some parts might still be installed.\n${NC}"
-# 	printf "${NC}" # Switch color to normal
-# 	exit 1
-# }
-# trap ctrl_c INT # trap ctrl-c and call ctrl_c()
-#!/bin/sh
+# This script is copied from the RabbitMQ documentation and will get the latest version of RabbitMQ.
+# It is not altered in any way.
 
 sudo apt-get install curl gnupg apt-transport-https -y
 
