@@ -25,20 +25,12 @@ docker run --detach --interactive --init --tty --rm --net rabbits --hostname rab
 
 # Install RabbitMq in the first container. For this we use the script that we provided with the
 # mounted shared folder.
-docker exec -it rabbit-1 ./RabbitMqDemoMount/install_rabbitmq.sh
-docker exec -it rabbit-2 ./RabbitMqDemoMount/install_rabbitmq.sh
-docker exec -it rabbit-3 ./RabbitMqDemoMount/install_rabbitmq.sh
+docker exec -it rabbit-1 ./RabbitMqDemoMount/create_cluster.sh
 
+# As RabbitMQ Cluster discorvery works with a shared password called ERLANG_COOKIE, we need to
+# extract the data from the first node and pass it do the other nodes.
+ERLANG_COOKIE=$(docker exec rabbit-1 cat /var/lib/rabbitmq/.erlang.cookie)
 
-
-
-# # Install ownia in the first container, using the create-cluster command and get the erlang_cookie
-# # docker exec rabbit-1 apt-get install ./owniaMount/ownia_0.0.1_amd64.deb
-# # docker exec rabbit-1 ownia install create-cluster
-# ERLANG_COOKIE=$(docker exec rabbit-1 cat /var/lib/rabbitmq/.erlang.cookie)
-
-# # Install ownia in the second and third container, using the join-cluster command and the erlang_cookie we fetched before
-# docker exec rabbit-2 apt-get install ./owniaMount/ownia_0.0.1_amd64.deb
-# docker exec rabbit-2 bash -c "ownia install join-cluster --cluster-key $ERLANG_COOKIE"
-# docker exec rabbit-3 apt-get install ./owniaMount/ownia_0.0.1_amd64.deb
-# docker exec rabbit-3 bash -c "ownia install join-cluster --cluster-key $ERLANG_COOKIE"
+# Now we pass this cookie to the next node and install Rabbit MQ with the provided cookie.
+# The new node will then discover the existing Rabbit MQ server and form a cluster.
+docker exec -it rabbit-2 ./RabbitMqDemoMount/join_cluster.sh --cluster-key $ERLANG_COOKIE
