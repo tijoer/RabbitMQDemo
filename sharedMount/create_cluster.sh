@@ -33,6 +33,7 @@ sudo service rabbitmq-server restart
 # Add a user called tim to the RabbitMQ Dashboard.
 sudo rabbitmqctl add_user tim $(sudo cat /var/lib/rabbitmq/.erlang.cookie)
 sudo rabbitmqctl set_user_tags tim administrator
+sudo rabbitmqctl set_permissions -p / tim ".*" ".*" ".*"
 scroll_window_stop
 
 printf "\n"

@@ -1,15 +1,26 @@
 #!/bin/bash
 
-# Set RabbitMQ credentials and host
-RABBITMQ_USER="tim"
-RABBITMQ_PASSWORD="SAZQZUWFBEMYBJKHFZIZ"
-RABBITMQ_HOST="localhost"
+rabbitmqctl add_vhost vhost
+rabbitmqctl set_permissions -p vhost1 tim ".*" ".*" ".*"
 
-# Declare a queue named "my_queue"
-rabbitmqadmin -u $RABBITMQ_USER -p $RABBITMQ_PASSWORD -H $RABBITMQ_HOST -V "/" declare queue name=my_queue durable=true
+# Use curl to create a new queue called 'test_queue' on the RabbitMQ server.
+curl -i -u tim:$(sudo cat /var/lib/rabbitmq/.erlang.cookie) \
+    -H "content-type:application/json" \
+    -XPUT -d'{"type":"classic","durable":true,"auto_delete":false,"arguments":{}}' \
+    http://localhost:15672/api/queues/vhost1/test_queue
 
-# Publish a message to the queue
-rabbitmqadmin -u $RABBITMQ_USER -p $RABBITMQ_PASSWORD -H $RABBITMQ_HOST -V "/" publish routing_key=my_queue payload="Hello, RabbitMQ!"
+# Publish a message to the 'test_queue' queue.
+curl -i -u tim:$(sudo cat /var/lib/rabbitmq/.erlang.cookie) \
+    -H "content-type:application/json" \
+    -XPOST -d'{"properties":{},"routing_key":"test_queue","payload":"Hello World!","payload_encoding":"string"}' \
+    http://localhost:15672/api/exchanges/vhost1/amq.default/publish
 
-# Get the message from the queue
-rabbitmqadmin -u $RABBITMQ_USER -p $RABBITMQ_PASSWORD -H $RABBITMQ_HOST -V "/" get queue=my_queue requeue=false
+# Use curl to get the message from the 'test_queue' queue.
+# Also set ackmod to 'ack_requeue_true' to requeue the message after it has been read.
+# Also set encoding to 'auto' to automatically detect the encoding of the message.
+curl -i -u tim:$(sudo cat /var/lib/rabbitmq/.erlang.cookie) \
+    -H "content-type:application/json" \
+    -XPOST -d'{"count":1,"ackmode":"ack_requeue_true","encoding":"auto"}' \
+    http://localhost:15672/api/queues/vhost1/test_queue/get
+
+exit 0

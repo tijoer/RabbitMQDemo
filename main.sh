@@ -35,3 +35,8 @@ ERLANG_COOKIE=$(docker exec rabbit-1 cat /var/lib/rabbitmq/.erlang.cookie)
 # The new node will then discover the existing Rabbit MQ server and form a cluster.
 docker exec -it rabbit-2 ./RabbitMqDemoMount/join_cluster.sh --cluster-key $ERLANG_COOKIE
 docker exec -it rabbit-3 ./RabbitMqDemoMount/join_cluster.sh --cluster-key $ERLANG_COOKIE
+
+echo "RabbitMQ Cluster is now running. You can access the management dashboard at http://localhost:8081, http://localhost:8082, and http://localhost:8083"
+echo "The username is 'tim' and the password is the erlang cookie below."
+echo "$ERLANG_COOKIE"
+echo "You can now enter one of the containers and go to /RabbitMqDemoMount and run queue.sh to see some basic message queue capabilites."
