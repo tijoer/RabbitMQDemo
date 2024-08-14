@@ -1,22 +1,22 @@
-FROM rust:bookworm
+# FROM rust:bookworm
 
-ARG USERNAME=tim
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
+# ARG USERNAME=tim
+# ARG USER_UID=1000
+# ARG USER_GID=$USER_UID
 
-# WORKDIR /usr/src/myapp
-# COPY . .
+# # WORKDIR /usr/src/myapp
+# # COPY . .
 
-# RUN apt-get update
-# RUN apt-get install \
-#     vim \
-#     sudo \
-#     zsh \
-#     build-essential \
-#     shellcheck \
-#     -y
+# # RUN apt-get update
+# # RUN apt-get install \
+# #     vim \
+# #     sudo \
+# #     zsh \
+# #     build-essential \
+# #     shellcheck \
+# #     -y
 
-EXPOSE 4369 15672
+# EXPOSE 4369 8081 8082 8083 15672
 
-# ENV SHELL /bin/zsh
-# RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+# # ENV SHELL /bin/zsh
+# # RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended

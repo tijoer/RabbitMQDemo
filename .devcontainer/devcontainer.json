@@ -1,40 +1,42 @@
 {
 	"name": "RabbitMQ Demo Devcontainer",
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"cschleiden.vscode-github-actions",
-				"ms-vsliveshare.vsliveshare",
-				"matklad.rust-analyzer",
-				"serayuzgur.crates",
-				"vadimcn.vscode-lldb",
-				"rust-lang.rust-analyzer",
-				"humao.rest-client",
-				"GitHub.copilot"
-			],
-			"settings": {
-				"editor.formatOnSave": true
-				// "terminal.integrated.shell.linux": "/usr/bin/zsh"
-			}
-		}
-	},
-	"dockerFile": "Dockerfile",
-	"portsAttributes": {
-		"8081": {
-			"label": "Rabbit Test Server 1"
-		},
-		"8082": {
-			"label": "Rabbit Test Server 2"
-		},
-		"8083": {
-			"label": "Rabbit Test Server 3"
-		},
-		"15672": {
-			"label": "Local RabbitMq Dashboard"
-		}
-	},
-	"features": {
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
-	},
-	"postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}"
+	"image": "mcr.microsoft.com/vscode/devcontainers/debian:bookworm"
+	// "features": {
+	// 	"docker-in-docker": {
+	// 		"version": "latest"
+	// 	}
+	// },
+	// "customizations": {
+	// 	"vscode": {
+	// 		"extensions": [
+	// 			"GitHub.copilot",
+	// 			"ms-azuretools.vscode-docker"
+	// 		],
+	// 		"settings": {
+	// 			"editor.formatOnSave": true
+	// 		}
+	// 	}
+	// },
+	// // "dockerFile": "Dockerfile",
+	// "portsAttributes": {
+	// 	"8081": {
+	// 		"label": "Rabbit Test Server 1"
+	// 	},
+	// 	"8082": {
+	// 		"label": "Rabbit Test Server 2"
+	// 	},
+	// 	"8083": {
+	// 		"label": "Rabbit Test Server 3"
+	// 	},
+	// 	"15672": {
+	// 		"label": "Local RabbitMq Dashboard"
+	// 	}
+	// },
+	// "forwardPorts": [
+	// 	8081,
+	// 	8082,
+	// 	8083,
+	// 	15672
+	// ],
+	// "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}"
 }

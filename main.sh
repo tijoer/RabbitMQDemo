@@ -26,6 +26,8 @@ docker run --detach --interactive --init --tty --rm --net rabbits --hostname rab
 # Install RabbitMq in the first container. For this we use the script that we provided with the
 # mounted shared folder.
 docker exec -it rabbit-1 ./RabbitMqDemoMount/install_rabbitmq.sh
+docker exec -it rabbit-2 ./RabbitMqDemoMount/install_rabbitmq.sh
+docker exec -it rabbit-3 ./RabbitMqDemoMount/install_rabbitmq.sh
 
 
 
