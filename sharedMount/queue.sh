@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rabbitmqctl add_vhost vhost
+rabbitmqctl add_vhost vhost1
 rabbitmqctl set_permissions -p vhost1 tim ".*" ".*" ".*"
 
 # Use curl to create a new queue called 'test_queue' on the RabbitMQ server.
