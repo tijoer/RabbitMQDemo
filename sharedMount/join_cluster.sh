@@ -9,13 +9,9 @@ fi
 
 # The cluster key 🔑 is the first argument and gets passed from install.rs when this script is run as
 # a child process. It is passed as the --cluster-key argument to the join-cluster command.
-CLUSTER_KEY=$1
-echo CLUSTER KEY CLUSTER KEY CLUSTER KEY CLUSTER KEY CLUSTER KEY CLUSTER KEY 
-echo $1
-echo $2
-echo $3
-echo $CLUSTER_KEY
-echo CLUSTER KEY CLUSTER KEY CLUSTER KEY CLUSTER KEY CLUSTER KEY CLUSTER KEY 
+# FIXME $2 is not the correct way to parse arguments.
+CLUSTER_KEY=$2 
+
 sudo mkdir -p /var/lib/rabbitmq/
 sudo echo $CLUSTER_KEY >/var/lib/rabbitmq/.erlang.cookie
 sudo chmod 700 /var/lib/rabbitmq/.erlang.cookie # RabbitMQ will check the permissions of the cookie file and will not start if the permissions are not correct.
@@ -64,10 +60,10 @@ printf "    and the password is the erlang cookie that you provided.\n"
 printf "\n"
 
 sudo cat /var/lib/rabbitmq/.erlang.cookie
-printf "     ${RED}   <---- KEEP THIS KEY IN A SECURE PLACE. YOU WILL NEED IT TO JOIN THE CLUSTER.${NC}\n"
+printf "  ${RED}  <---- KEEP THIS KEY IN A SECURE PLACE. YOU WILL NEED IT TO JOIN THE CLUSTER.${NC}\n"
 
 printf "\n"
-printf "${LIGHT_GRAY}⚠️${NC}  It is important to have a backup plan for the cluster, as everything can break. If the key is lost, it may not be possible to access the cluster or recover encrypted files.\n"
+printf "${LIGHT_GRAY}⚠️${NC}  Everything breakes. It is important to have a backup plan for the cluster. If the key is lost, it may not be possible to access the cluster or recover encrypted files.\n"
 printf "\n"
 printf "${GREEN}✅${NC}  RabbitMq has been succefully installed and is now running. Enjoy!\n"
 exit 0
