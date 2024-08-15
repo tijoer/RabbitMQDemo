@@ -1,4 +1,4 @@
-# 🐰 RabbitMqDemo
+# 🐰 RabbitMQDemo
 
 **This is a RabbitMQ Demo project. To get started, please run the `main.sh` script.**
 
@@ -8,7 +8,7 @@ This demo showcases how to set up and use RabbitMQ for message queuing. It inclu
 
 ## 📊 Slides
 
-I prepared some slides that can be directly accessed with this link. For ease of use the slides are made in Markdown.
+I prepared some slides in Markdown format that can be directly accessed with this link.
 
 [Slides](slides/1.md)
 
