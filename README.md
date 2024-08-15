@@ -14,8 +14,9 @@ I prepared some slides in Markdown format that can be directly accessed with thi
 
 ## ⚙️ Setup
 
-1. **Clone this repository.**
-2. **Start a GitHub Devcontainer.** I suggest running four cores.
+1. **Clone this repository.** Optional
+2. **Start a GitHub Devcontainer.** I suggest running four cores. You can use this button to start your own devcontainer.
+  [![GitHub Codespaces Main Branch](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=841888534)
 
 ## 📚 Resources
 
