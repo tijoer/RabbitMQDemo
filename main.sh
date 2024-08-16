@@ -19,13 +19,13 @@ docker rm rabbit-3 --force 2>/dev/null || true
 # --interactive to keep the containers running and to be able to interact with them.
 # Mount the "sharedMount" folder from this project to /RabbitMqDemoMount in the created containers,
 # so that we have am easy way do get this install script into the container.
-docker run --detach --interactive --init --tty --rm --net rabbits --hostname rabbit-1 --name rabbit-1 --publish 8081:15672 -v /workspaces/RabbitMqDemo/sharedMount:/RabbitMqDemoMount debian-rabbitmqdemo-runner
-docker run --detach --interactive --init --tty --rm --net rabbits --hostname rabbit-2 --name rabbit-2 --publish 8082:15672 -v /workspaces/RabbitMqDemo/sharedMount:/RabbitMqDemoMount debian-rabbitmqdemo-runner
-docker run --detach --interactive --init --tty --rm --net rabbits --hostname rabbit-3 --name rabbit-3 --publish 8083:15672 -v /workspaces/RabbitMqDemo/sharedMount:/RabbitMqDemoMount debian-rabbitmqdemo-runner
+docker run --detach --interactive --init --tty --rm --net rabbits --hostname rabbit-1 --name rabbit-1 --publish 8081:15672 -v /workspaces/RabbitMQDemo/sharedMount:/RabbitMQDemoMount debian-rabbitmqdemo-runner
+docker run --detach --interactive --init --tty --rm --net rabbits --hostname rabbit-2 --name rabbit-2 --publish 8082:15672 -v /workspaces/RabbitMQDemo/sharedMount:/RabbitMQDemoMount debian-rabbitmqdemo-runner
+docker run --detach --interactive --init --tty --rm --net rabbits --hostname rabbit-3 --name rabbit-3 --publish 8083:15672 -v /workspaces/RabbitMQDemo/sharedMount:/RabbitMQDemoMount debian-rabbitmqdemo-runner
 
 # Install RabbitMq in the first container. For this we use the script that we provided with the
 # mounted shared folder.
-docker exec -it rabbit-1 ./RabbitMqDemoMount/create_cluster.sh
+docker exec -it rabbit-1 ./RabbitMQDemoMount/create_cluster.sh
 
 # As RabbitMQ Cluster discorvery works with a shared password called ERLANG_COOKIE, we need to
 # extract the data from the first node and pass it do the other nodes.
@@ -33,10 +33,10 @@ ERLANG_COOKIE=$(docker exec rabbit-1 cat /var/lib/rabbitmq/.erlang.cookie)
 
 # Now we pass this cookie to the next node and install Rabbit MQ with the provided cookie.
 # The new node will then discover the existing Rabbit MQ server and form a cluster.
-docker exec -it rabbit-2 ./RabbitMqDemoMount/join_cluster.sh --cluster-key $ERLANG_COOKIE
-docker exec -it rabbit-3 ./RabbitMqDemoMount/join_cluster.sh --cluster-key $ERLANG_COOKIE
+docker exec -it rabbit-2 ./RabbitMQDemoMount/join_cluster.sh --cluster-key $ERLANG_COOKIE
+docker exec -it rabbit-3 ./RabbitMQDemoMount/join_cluster.sh --cluster-key $ERLANG_COOKIE
 
 echo "RabbitMQ Cluster is now running. You can access the management dashboard at http://localhost:8081, http://localhost:8082, and http://localhost:8083"
 echo "The username is 'tim' and the password is the erlang cookie below."
 echo "$ERLANG_COOKIE"
-echo "You can now enter one of the containers and go to /RabbitMqDemoMount and run queue.sh to see some basic message queue capabilites."
+echo "You can now enter one of the containers and go to /RabbitMQDemoMount and run queue.sh to see some basic message queue capabilites."
