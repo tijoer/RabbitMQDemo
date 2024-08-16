@@ -1,5 +1,19 @@
-#!/bin/bash -x
+#!/bin/bash
 
+# Just ignore everything until the first docker command. There is a bit of code to make the scripts output
+# more readable in the terminal. This is not necessary for the script to work.
+
+source "$(dirname "$0")/sharedMount/bash_helpers.sh"
+
+# Just a little helper to make sure that the script is not running in a non-interactive shell.+
+if tty -s; then
+    trap ctrl_c INT # trap ctrl-c and call ctrl_c()
+    trap ctrl_c SIGTERM
+fi
+
+clear_next_lines_to_scroll_down
+printf "${LIGHT_BLUE}⏳${NC} Preparing the RabbitMQ containers... \n"
+scroll_window_start
 # Create a network for the three containers to communicate with each other.
 docker network create rabbits
 
@@ -22,6 +36,7 @@ docker rm rabbit-3 --force 2>/dev/null || true
 docker run --detach --interactive --init --tty --rm --net rabbits --hostname rabbit-1 --name rabbit-1 --publish 8081:15672 -v /workspaces/RabbitMQDemo/sharedMount:/RabbitMQDemoMount debian-rabbitmqdemo-runner
 docker run --detach --interactive --init --tty --rm --net rabbits --hostname rabbit-2 --name rabbit-2 --publish 8082:15672 -v /workspaces/RabbitMQDemo/sharedMount:/RabbitMQDemoMount debian-rabbitmqdemo-runner
 docker run --detach --interactive --init --tty --rm --net rabbits --hostname rabbit-3 --name rabbit-3 --publish 8083:15672 -v /workspaces/RabbitMQDemo/sharedMount:/RabbitMQDemoMount debian-rabbitmqdemo-runner
+scroll_window_stop
 
 # Install RabbitMq in the first container. For this we use the script that we provided with the
 # mounted shared folder.
