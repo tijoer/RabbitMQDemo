@@ -1,7 +1,6 @@
 {
 	"name": "RabbitMQ Demo Devcontainer",
 	"image": "mcr.microsoft.com/devcontainers/base:bookworm",
-	"workspaceFolder": "/workspace/RabbitMQDemo",
 	"features": {
 		"docker-in-docker": {
 			"version": "latest"
