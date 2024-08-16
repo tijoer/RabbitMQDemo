@@ -18,6 +18,10 @@ I prepared some slides in Markdown format that can be directly accessed with thi
 2. **Start a GitHub Devcontainer.** I suggest running four cores. You can use this button to start your own devcontainer.
   [![GitHub Codespaces Main Branch](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=841888534)
 
+## 🐛 Kown Bugs
+When you clone this repo, it changes to workspace folder name. However in main.sh the folder name is currently hardcoded. So you will need to change to folder names.
+
+
 ## 📚 Resources
 
 - [RabbitMQ](https://www.rabbitmq.com/)
